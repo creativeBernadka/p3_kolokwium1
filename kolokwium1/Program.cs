@@ -85,7 +85,41 @@ namespace kolokwium1
                 Console.WriteLine("");
             }
 
-        } 
+        }
+
+        static int[,] GenerateTable(int m, int n)
+        {
+            int[,] table1 = new int[m,n];
+            Console.WriteLine("Uzyta tabela:");
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    table1[i, j] = (m - i) * (j + 1);
+                    Console.Write(table1[i, j] + " ");
+                }
+                Console.WriteLine("");
+            }
+
+            return table1;
+        }
+
+        static int Zad4(int[,] table, int m, int n)
+        {
+            int minimum = table[0, 0];
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (table[i, j] < minimum)
+                    {
+                        minimum = table[i, j];
+                    }
+                }
+            }
+
+            return minimum;
+        }
         
         static void Main(string[] args)
         {
@@ -111,6 +145,15 @@ namespace kolokwium1
             string l = Console.ReadLine();
             
             Zad3(Int32.Parse(m), Int32.Parse(n), Int32.Parse(k), Int32.Parse(l));
+            
+            Console.WriteLine("\nZADANIE 4 - minimum tablicy");
+            Console.WriteLine("Podaj pierwszy wymiar tabeli: ");
+            string a = Console.ReadLine();
+            Console.WriteLine("Podaj drugi wymiar tabeli: ");
+            string b = Console.ReadLine();
+            int min = Zad4(GenerateTable(Int32.Parse(a), Int32.Parse(b)), Int32.Parse(a), Int32.Parse(b));
+            Console.WriteLine("Minimalna wartosc powyzszej tabeli to: " + min);
+            
         }
     }
 }
