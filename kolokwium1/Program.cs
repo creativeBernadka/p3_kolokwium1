@@ -120,6 +120,90 @@ namespace kolokwium1
 
             return minimum;
         }
+
+        class EBook
+        {
+            readonly string Autor;
+            readonly string Tytul;
+            readonly DateTime DataWydania;
+
+            private DateTime _DataOstatniegoZakupu;
+            public DateTime DataOstatniegoZakupu
+            {
+                get { return _DataOstatniegoZakupu; }
+                set
+                {
+                    if (value < _DataOstatniegoZakupu)
+                    {
+                        Console.WriteLine("Nie mozna dodac wartosci mniejszej niz poprzednia (Data Ostatniego Zakupu)");
+                    }
+
+                    else
+                    {
+                        _DataOstatniegoZakupu = value;
+                    }
+                }
+            }
+
+            private double _CenaStandardowa;
+            public double CenaStandardowa
+            {
+                get { return _CenaStandardowa;}
+                set
+                {
+                    if (value < 0)
+                    {
+                        Console.WriteLine("Cena nie moze byc ujemna");
+                        _CenaStandardowa = 0;
+                    }
+                    else
+                    {
+                        _CenaStandardowa = value;
+                    }
+                }
+            }
+
+            private int _Obnizka;
+
+            public int Obnizka
+            {
+                get => _Obnizka;
+                set
+                {
+                    if (value > 100 || value < 0)
+                    {
+                        Console.WriteLine("Bledna wartosc (Obnizka)");
+                        _Obnizka = 0;
+                    }
+                    else
+                    {
+                        _Obnizka = value;
+                    }
+                }
+            }
+
+            private double _AktualnaCena;
+
+            public double AktualnaCena
+            {
+                get => _AktualnaCena;
+                set
+                {
+                    _AktualnaCena = value;
+                }
+            }
+
+            public EBook(string autor, string tytul, DateTime dataWydania,
+                DateTime dataOstatniegoZakupu, double cenaStandardowa, int obnizka)
+            {
+                Autor = autor;
+                Tytul = tytul;
+                DataWydania = dataWydania;
+                DataOstatniegoZakupu = dataOstatniegoZakupu;
+                CenaStandardowa = cenaStandardowa;
+                Obnizka = obnizka;
+            }
+        }
         
         static void Main(string[] args)
         {
@@ -154,6 +238,10 @@ namespace kolokwium1
             int min = Zad4(GenerateTable(Int32.Parse(a), Int32.Parse(b)), Int32.Parse(a), Int32.Parse(b));
             Console.WriteLine("Minimalna wartosc powyzszej tabeli to: " + min);
             
+            
+            Console.WriteLine("\nZADANIE 5 - klasy");
+            EBook eBook = new EBook("Autor", "tytul", 
+                DateTime.Now, DateTime.Today, 34.5, 0);
         }
     }
 }
