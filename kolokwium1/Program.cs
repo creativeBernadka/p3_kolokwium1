@@ -189,7 +189,7 @@ namespace kolokwium1
                 get => _AktualnaCena;
                 set
                 {
-                    _AktualnaCena = value;
+                    _AktualnaCena = _CenaStandardowa * (100 - _Obnizka)/100;
                 }
             }
 
